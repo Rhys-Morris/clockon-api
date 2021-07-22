@@ -14,5 +14,8 @@ RSpec.describe "User Factory" do
         it "has the correct name" do
             expect(@user.name).to eq "John"
         end
+        it "has the correct password" do
+            expect(@user.password).to eq "password"
+        end
     end
 end
