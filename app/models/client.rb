@@ -1,5 +1,6 @@
 class Client < ApplicationRecord
   belongs_to :user
+  has_many :projects
 
   # Validations
   validates :name, presence: true, length: { maximum: 40 }

@@ -45,3 +45,38 @@ RSpec.describe "Client Factory" do
         end
     end
 end
+
+RSpec.describe "Project Factory" do
+    it "is valid" do
+        expect(build :project).to be_valid
+    end
+    context "testing factory properties" do
+        before :all do 
+            @project = build :project
+        end
+        it "has the correct color" do
+            expect(@project.color).to eq "#000000"
+        end
+        it "has the correct name" do
+            expect(@project.name).to eq "Test Project"
+        end
+        it "has the correct active status" do
+            expect(@project.active).to eq true
+        end
+        it "has the correct billable status" do
+            expect(@project.billable).to eq true
+        end
+        it "has the correct due date" do
+            expect(@project.due_date).to eq Date.new(2022, 7, 30)
+        end
+        it "has the correct hours" do
+            expect(@project.hours).to eq 1.5
+        end
+        it "has the correct association with user" do
+            expect(@project.user.name).to eq "John"
+        end
+        it "has the correct association with client" do
+            expect(@project.client.name).to eq "Test Client"
+        end
+    end
+end

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
     has_many :clients
+    has_many :projects
 
     #Validations
     validates :name, presence: true, format: {with: /\A[a-zA-Z]+\z/i}
