@@ -11,13 +11,23 @@ RSpec.describe Client, type: :model do
       expect(@client).to be_invalid
     end
 
-    it "should be invalid if blank" do
+    it "should be invalid if name blank" do
       @client.name = "    "
       expect(@client).to be_invalid
     end
 
-    it "should be invalid if > 40 characters" do
+    it "should be invalid if name > 40 characters" do
       @client.name = "a" * 41
+      expect(@client).to be_invalid
+    end
+
+    it "should be invalid if contact > 40 characters" do
+      @client.contact = "a" * 41
+      expect(@client).to be_invalid
+    end
+
+    it "should be invalid if email > 40 characters" do
+      @client.email = "a" * 32 + "@test.com"
       expect(@client).to be_invalid
     end
 
