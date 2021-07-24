@@ -2,13 +2,13 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %w[destroy edit update]
 
   def index
-    render json: { project: fetch_all_projects }, status: 200
+    render json: { projects: fetch_all_projects }, status: 200
   end
 
   def create
     @project = @user.projects.create(project_params)
     if @project.valid?
-      render json: { project: fetch_all_projects }, status: 201
+      render json: { projects: fetch_all_projects }, status: 201
     else
       render json: { error: @project.errors.full_messages }
     end
@@ -32,14 +32,14 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:name, :color, :due_date, :active, :id, :billable, :project_id, :user_id, :hours)
+    params.require(:project).permit(:name, :color, :due_date, :active, :id, :billable, :project_id, :client_id, :hours)
   end
   
   def set_project
-    @roject = @user.projects.find(params[:id]) 
+    @project = @user.projects.find(params[:id]) 
   end
 
   def fetch_all_projects
-    @projects = @user.projects.all
+    @projects = @user.projects.with_client_name
   end
 end
