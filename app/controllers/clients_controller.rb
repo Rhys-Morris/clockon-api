@@ -40,7 +40,7 @@ class ClientsController < ApplicationController
   end
 
   def fetch_all_clients
-    @clients = @user.clients.all
+    @clients = @user.clients.with_project_numbers
   end
 
 end
