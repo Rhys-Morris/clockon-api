@@ -13,4 +13,9 @@ Rails.application.routes.draw do
   get "/projects/:id", to: "projects#show"
   put "/projects/:id", to: "projects#update"
   delete "/projects/:id", to: "projects#destroy"
+  # TASKS
+  get "/tasks/:project_id", to: "tasks#index"
+  post "/tasks/:project_id", to: "tasks#create"
+  put "/tasks/:id", to: "tasks#update"
+  delete "/tasks/:project_id/:id", to: "tasks#destroy"
 end
