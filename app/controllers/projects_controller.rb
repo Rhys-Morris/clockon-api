@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %w[destroy edit update]
+  before_action :set_project, only: %w[destroy show edit update]
 
   def index
     render json: { projects: fetch_all_projects }, status: 200
@@ -12,6 +12,11 @@ class ProjectsController < ApplicationController
     else
       render json: { error: @project.errors.full_messages }
     end
+  end
+
+  def show
+    render json: { project: @project }, status: 200
+    # TO DO - error handling
   end
 
   def update
@@ -36,10 +41,10 @@ class ProjectsController < ApplicationController
   end
   
   def set_project
-    @project = @user.projects.find(params[:id]) 
+    @project = @user.projects.with_client_name(params[:id])
   end
 
   def fetch_all_projects
-    @projects = @user.projects.with_client_name
+    @projects = @user.projects.with_client_names
   end
 end
