@@ -80,3 +80,26 @@ RSpec.describe "Project Factory" do
         end
     end
 end
+
+RSpec.describe "Task Factory" do
+    it "is valid" do
+        expect(build :task).to be_valid
+    end
+    context "testing factory properties" do
+        before :all do 
+            @task = build :task
+        end
+        it "has the correct title" do
+            expect(@task.title).to eq "New Task"
+        end
+        it "has the correct name" do
+            expect(@task.due_date).to eq Date.new(2021, 12, 25)
+        end
+        it "has the correct password" do
+            expect(@task.estimated_hours).to eq 10.0
+        end
+        it "has the correct association with project" do
+            expect(@task.project.name).to eq "Test Project"
+        end
+    end
+end

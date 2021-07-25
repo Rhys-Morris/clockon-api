@@ -2,6 +2,8 @@ class Project < ApplicationRecord
   belongs_to :client
   belongs_to :user
 
+  has_many :tasks
+
   # Validations
   validates :name, presence: true, length: { maximum: 40 }
   validates :color, presence: true
