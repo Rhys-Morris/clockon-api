@@ -15,13 +15,13 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    render json: { project: @project }, status: 200
+    render json: { project: Project.with_client_name(@project.id) }, status: 200
     # TO DO - error handling
   end
 
   def update
     if @project.update(project_params)
-      render json: { projects: fetch_all_projects }, status: 200
+      render json: { project: Project.with_client_name(@project.id) }, status: 200
     else
       error = @project.errors.full_messages
       set_project
@@ -41,7 +41,7 @@ class ProjectsController < ApplicationController
   end
   
   def set_project
-    @project = @user.projects.with_client_name(params[:id])
+    @project = @user.projects.find(params[:id])
   end
 
   def fetch_all_projects
