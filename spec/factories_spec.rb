@@ -92,14 +92,37 @@ RSpec.describe "Task Factory" do
         it "has the correct title" do
             expect(@task.title).to eq "New Task"
         end
-        it "has the correct name" do
+        it "has the correct due date" do
             expect(@task.due_date).to eq Date.new(2021, 12, 25)
         end
-        it "has the correct password" do
+        it "has the correct estimated hours" do
             expect(@task.estimated_hours).to eq 10.0
         end
         it "has the correct association with project" do
             expect(@task.project.name).to eq "Test Project"
+        end
+    end
+end
+
+RSpec.describe "Expense Factory" do
+    it "is valid" do
+        expect(build :expense).to be_valid
+    end
+    context "testing factory properties" do
+        before :all do 
+            @expense = build :expense
+        end
+        it "has the correct title" do
+            expect(@expense.name).to eq "New Expense"
+        end
+        it "has the correct date" do
+            expect(@expense.date).to eq Date.new(2021, 07, 26)
+        end
+        it "has the correct cost" do
+            expect(@expense.cost).to eq 20.5
+        end
+        it "has the correct association with project" do
+            expect(@expense.project.name).to eq "Test Project"
         end
     end
 end

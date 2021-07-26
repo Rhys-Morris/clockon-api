@@ -3,6 +3,7 @@ class Project < ApplicationRecord
   belongs_to :user
 
   has_many :tasks
+  has_many :expenses
 
   # Validations
   validates :name, presence: true, length: { maximum: 40 }
