@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: %w[destroy edit update]
+  before_action :set_client, only: %i[ destroy edit update ]
 
   def index
     render json: { clients: fetch_all_clients }, status: 200

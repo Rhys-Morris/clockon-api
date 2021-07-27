@@ -1,12 +1,7 @@
 class TasksController < ApplicationController
-    before_action :set_project, only: %w[ index, create ]
-    before_action :set_task, only: %w[ update, destroy ]
+    before_action :set_task, only: [:update, :destroy]
+    before_action :set_project, only: [:create, :update, :destroy]
     
-    def index
-        @tasks = @project.tasks
-        render json: { tasks: @tasks }, status : 200
-    end
-
     def create
         @task = @project.tasks.create(task_params)
         if @task.valid?
@@ -17,8 +12,7 @@ class TasksController < ApplicationController
     end
 
     def update
-        @task = @task.update(task_params)
-        if @task.valid?
+        if @task.update(task_params)
             render json: { tasks: @project.tasks }, status: 200
         else
             render json: { error: @task.errors.full_messages }
@@ -37,10 +31,10 @@ class TasksController < ApplicationController
     end
 
     def task_params
-        params.require(:task).permit(:id, :title, :due_date, :estimated_hours, :project_id)
+        params.require(:task).permit(:id, :title, :due_date, :estimated_hours, :project_id, :completed)
     end
 
     def set_project
-        project = @user.projects.find(params[:project_id])
+        @project = @user.projects.find(params[:project_id])
     end
 end

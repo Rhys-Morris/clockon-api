@@ -1,12 +1,7 @@
 class ExpensesController < ApplicationController
-    before_action :set_project, only: %w[ index, create ]
-    before_action :set_expense, only: %w[ update, destroy ]
+    before_action :set_project, only: [:create, :update, :destroy ]
+    before_action :set_expense, only: [:update, :destroy ]
     
-    def index
-        @expenses = @project.expenses
-        render json: { expenses: @expenses }, status : 200
-    end
-
     def create
         @expense = @project.expenses.create(expense_params)
         if @expense.valid?
@@ -17,8 +12,7 @@ class ExpensesController < ApplicationController
     end
 
     def update
-        @expense = @expense.update(expense_params)
-        if @expense.valid?
+        if @expense.update(expense_params)
             render json: { expenses: @project.expenses }, status: 200
         else
             render json: { error: @expense.errors.full_messages }
@@ -33,7 +27,7 @@ class ExpensesController < ApplicationController
     private
 
     def set_expense
-        @expense = expense.find(params[:id])
+        @expense = Expense.find(params[:id])
     end
 
     def expense_params
@@ -41,6 +35,6 @@ class ExpensesController < ApplicationController
     end
 
     def set_project
-        project = @user.projects.find(params[:project_id])
+        @project = @user.projects.find(params[:project_id])
     end
 end

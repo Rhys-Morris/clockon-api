@@ -3,6 +3,6 @@ class Task < ApplicationRecord
 
   # Validations
   validates :title, presence: true, length: { maximum: 100 }
-  validates :due_date, presence: true
+  validates :completed, inclusion: { in: [ true, false ] }
   validates :estimated_hours, presence: true, numericality: { greater_than: 0.0, less_than: 1000.0}
 end

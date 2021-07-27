@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %w[destroy show edit update]
+  before_action :set_project, only: %i[ destroy show edit update ]
 
   def index
     render json: { projects: fetch_all_projects }, status: 200
@@ -15,8 +15,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    render json: { project: Project.with_client_name(@project.id) }, status: 200
-    # TO DO - error handling
+    render json: { project: Project.with_client_name(@project.id), tasks: @project.tasks, expenses: @project.expenses }, status: 200
   end
 
   def update

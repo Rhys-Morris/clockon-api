@@ -16,9 +16,11 @@ RSpec.describe Task, type: :model do
       @task.title = "a" * 101
       expect(@task).to be_invalid
     end
-    it "should have a due_date" do
-      @task.due_date = nil
+    it "should have a boolean completed" do
+      @task.completed = nil
       expect(@task).to be_invalid
+      @task.completed = false
+      expect(@task).to be_valid
     end
     it "should have estimated hours" do
       @task.estimated_hours = nil
