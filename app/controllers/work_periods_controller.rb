@@ -44,6 +44,6 @@ class WorkPeriodsController < ApplicationController
   end
 
   def fetch_all_work_periods
-    @work_periods = WorkPeriod.all
+    @work_periods = WorkPeriod.with_project_details
   end
 end
