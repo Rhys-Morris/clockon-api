@@ -126,3 +126,26 @@ RSpec.describe "Expense Factory" do
         end
     end
 end
+
+RSpec.describe "WorkPeriod Factory" do
+    it "is valid" do
+        expect(build :work_period).to be_valid
+    end
+    context "testing factory properties" do
+        before :all do 
+            @work_period = build :work_period
+        end
+        it "has the correct title" do
+            expect(@work_period.title).to eq "A task I was working on"
+        end
+        it "has the correct start_time" do
+            expect(@work_period.start_time).to eq "2021-07-28 12:50:49"
+        end
+        it "has the correct end_time" do
+            expect(@work_period.end_time).to eq "2021-07-28 12:50:56"
+        end
+        it "has the correct association with project" do
+            expect(@work_period.project.name).to eq "Test Project"
+        end
+    end
+end

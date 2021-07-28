@@ -4,6 +4,7 @@ class Project < ApplicationRecord
 
   has_many :tasks
   has_many :expenses
+  has_many :work_periods
 
   # Validations
   validates :name, presence: true, length: { maximum: 40 }
