@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorized, only: [:authenticate]
+  before_action :authorized, only: [:user_details]
 
   # REGISTRATION
   def create
@@ -12,6 +12,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def user_details
+    render json: { user: {name: @user.name, email: @user.email} }, status: 200
+  end
+
   # AUTHENTICATION
   def login
     @user = User.find_by(email: params[:email])
@@ -22,10 +26,6 @@ class UsersController < ApplicationController
     else
       render json: {error: "Invalid username or password"}
     end
-  end
-
-  def authenticate
-    render json: @user
   end
 
   private

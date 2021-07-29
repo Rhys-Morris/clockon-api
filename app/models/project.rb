@@ -19,10 +19,12 @@ class Project < ApplicationRecord
     end
   end
 
-  def self.with_client_name(id)
+  def self.with_additional_details(id)
     client_name = self.find(id).client.name
-    with_client_name = self.find(id).serializable_hash
-    with_client_name[:client] = client_name
-    with_client_name
+    work_periods = self.find(id).work_periods
+    added_details = self.find(id).serializable_hash
+    added_details[:client] = client_name
+    added_details[:work_periods] = work_periods
+    added_details
   end
 end

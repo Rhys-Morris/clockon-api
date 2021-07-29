@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-  get 'work_periods/index'
-  get 'work_periods/create'
-  get 'work_periods/update'
-  get 'work_periods/destroy'
   # LOGIN & AUTH
   post "/register", to: "users#create"
   post "/login", to: "users#login"
+  get "/user", to: "users#user_details"
   # CLIENTS
   get "/clients", to: "clients#index"
   post "/clients", to: "clients#create"
@@ -28,6 +25,5 @@ Rails.application.routes.draw do
   # WORK PERIODS
   get "/work", to: "work_periods#index"
   post "/work/:project_id", to: "work_periods#create"
-  put "/work//:project_id/:id", to: "work_periods#update"
   delete "/work/:project_id/:id", to: "work_periods#destroy"
 end

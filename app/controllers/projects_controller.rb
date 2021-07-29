@@ -15,12 +15,12 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    render json: { project: Project.with_client_name(@project.id), tasks: @project.tasks, expenses: @project.expenses }, status: 200
+    render json: { project: Project.with_additional_details(@project.id), tasks: @project.tasks, expenses: @project.expenses }, status: 200
   end
 
   def update
     if @project.update(project_params)
-      render json: { project: Project.with_client_name(@project.id) }, status: 200
+      render json: { project: Project.with_additional_details(@project.id) }, status: 200
     else
       error = @project.errors.full_messages
       set_project
