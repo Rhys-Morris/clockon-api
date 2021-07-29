@@ -23,6 +23,17 @@ RSpec.describe Project, type: :model do
       expect(@project).to be_invalid
     end
 
+    it "should have a billable rate between 0 and 9999" do
+      @project.billable_rate = 0
+      expect(@project).to be_invalid
+      @project.billable_rate = 10000
+      expect(@project).to be_invalid
+      @project.billable_rate = 1
+      expect(@project).to be_valid
+      @project.billable_rate = 9999
+      expect(@project).to be_valid
+    end
+
     it "should accept booleans for active attribute" do
       @project.active = false
       expect(@project).to be_valid

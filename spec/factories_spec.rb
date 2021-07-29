@@ -72,6 +72,9 @@ RSpec.describe "Project Factory" do
         it "has the correct hours" do
             expect(@project.hours).to eq 1.5
         end
+        it "has the correct billble rate" do
+            expect(@project.billable_rate).to eq 40.0
+        end
         it "has the correct association with user" do
             expect(@project.user.name).to eq "John"
         end
@@ -143,6 +146,9 @@ RSpec.describe "WorkPeriod Factory" do
         end
         it "has the correct end_time" do
             expect(@work_period.end_time).to eq "2021-07-28 12:50:56"
+        end
+        it "has the correct invoiced property" do
+            expect(@work_period.invoiced).to eq false
         end
         it "has the correct association with project" do
             expect(@work_period.project.name).to eq "Test Project"

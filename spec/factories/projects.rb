@@ -8,5 +8,6 @@ FactoryBot.define do
     billable { true }
     active { true }
     hours { 1.5 }
+    billable_rate { 40.0 }
   end
 end

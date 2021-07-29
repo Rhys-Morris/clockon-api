@@ -3,6 +3,7 @@ FactoryBot.define do
     title { "A task I was working on" }
     start_time { "2021-07-28 12:50:49" }
     end_time { "2021-07-28 12:50:56" }
+    invoiced { false }
     project factory: :project
   end
 end

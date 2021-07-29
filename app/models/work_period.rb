@@ -5,6 +5,7 @@ class WorkPeriod < ApplicationRecord
   validates :title, length: { maximum: 100 }
   validates :start_time, presence: true
   validates :end_time, presence: true
+  validates :invoiced, inclusion: { in: [true, false] }
 
   def self.with_project_details
     self.all.to_a.map(&:serializable_hash).each do |wp|
