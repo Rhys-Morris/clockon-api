@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      render json: { project: Project.with_additional_details(@project.id) }, status: 200
+      render json: { project: Project.with_additional_details(@project.id), tasks: @project.tasks, expenses: @project.expenses }, status: 200
     else
       error = @project.errors.full_messages
       set_project
@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:name, :color, :due_date, :active, :id, :billable, :project_id, :client_id, :hours)
+    params.require(:project).permit(:name, :color, :due_date, :active, :id, :billable, :project_id, :client_id, :hours, :billable_rate)
   end
   
   def set_project
@@ -44,6 +44,6 @@ class ProjectsController < ApplicationController
   end
 
   def fetch_all_projects
-    @projects = @user.projects.with_client_names
+    @projects = @user.projects.with_client_and_hours
   end
 end

@@ -2,6 +2,7 @@ class User < ApplicationRecord
     has_secure_password
     has_many :clients, dependent: :destroy
     has_many :projects, dependent: :destroy
+    has_many :work_periods, dependent: :destroy
 
     #Validations
     validates :name, presence: true, format: {with: /\A[a-zA-Z]+\z/i}

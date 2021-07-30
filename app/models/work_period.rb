@@ -14,4 +14,19 @@ class WorkPeriod < ApplicationRecord
       wp[:project_color] = linked_project.color
     end
   end
+
+  # Hours worked on a project
+  def self.total_hours project_id
+    self.where(project_id: project_id).map { |wp| (wp.end_time - wp.start_time) / 60 / 60}.inject(&:+)
+  end
+
+  def self.invoice_all
+    self.where(invoiced: false).each do |wp|
+      if wp.update(invoiced: true)
+        puts "Successfully updated invoiced status #{wp.title}"
+      else
+        raise "Unable to update invoiced status #{wp.title}"
+      end
+    end
+  end
 end

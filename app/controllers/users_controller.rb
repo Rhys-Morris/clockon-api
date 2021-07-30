@@ -3,12 +3,12 @@ class UsersController < ApplicationController
 
   # REGISTRATION
   def create
-    @user = User.create(user_params)
-    if @user.valid?
+    @user = User.new(user_params)
+    if @user.save
       token = encode_token({user_id: @user.id})
       render json: {token: token}
     else
-      render json: {error: "Invalid username or password"}
+      render json: {error: @user.errors.full_messages}
     end
   end
 
@@ -31,6 +31,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password)
   end
 end

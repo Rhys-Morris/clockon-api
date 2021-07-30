@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   delete "/expenses/:project_id/:id", to: "expenses#destroy"
   # WORK PERIODS
   get "/work", to: "work_periods#index"
+  get "/work/:project_id/invoice", to: "work_periods#invoice"
   post "/work/:project_id", to: "work_periods#create"
   delete "/work/:project_id/:id", to: "work_periods#destroy"
 end
