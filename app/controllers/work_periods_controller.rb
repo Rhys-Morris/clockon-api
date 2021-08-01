@@ -18,7 +18,7 @@ class WorkPeriodsController < ApplicationController
 
   def destroy
     @work_period.destroy
-    render json: { work_periods: @project.work_periods }, status: 200
+    render json: { work_periods: @project.work_periods.with_project_details }, status: 200
   end
 
   def invoice

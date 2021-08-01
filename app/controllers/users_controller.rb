@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorized, only: [:user_details]
+  before_action :authorized, only: [:user_details, :dash]
 
   # REGISTRATION
   def create
@@ -26,6 +26,10 @@ class UsersController < ApplicationController
     else
       render json: {error: "Invalid username or password"}
     end
+  end
+
+  def dash
+    render json: { user: {name: @user.name, email: @user.email}, tasks: @user.tasks.priority }, status: 200
   end
 
   private

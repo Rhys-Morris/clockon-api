@@ -3,7 +3,7 @@ class TasksController < ApplicationController
     before_action :set_project, only: [:create, :update, :destroy]
     
     def create
-        @task = @project.tasks.create(task_params)
+        @task = @user.tasks.create(task_params)
         if @task.valid?
             render json: { tasks: @project.tasks }, status: 201
         else

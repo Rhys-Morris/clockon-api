@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   post "/register", to: "users#create"
   post "/login", to: "users#login"
   get "/user", to: "users#user_details"
+  # DASH
+  get "/dash", to: "users#dash"
   # CLIENTS
   get "/clients", to: "clients#index"
   post "/clients", to: "clients#create"
