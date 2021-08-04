@@ -29,7 +29,12 @@ class UsersController < ApplicationController
   end
 
   def dash
-    render json: { user: {name: @user.name, email: @user.email}, tasks: @user.tasks.priority }, status: 200
+    render json: { 
+      user: { name: @user.name, email: @user.email },
+      tasks: @user.tasks.priority,
+      work_periods: @user.work_periods.last_week
+    }, 
+    status: 200
   end
 
   private
