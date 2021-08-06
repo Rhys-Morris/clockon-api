@@ -7,7 +7,7 @@ class Project < ApplicationRecord
   has_many :work_periods, dependent: :destroy
 
   # Validations
-  validates :name, presence: true, length: { maximum: 40 }
+  validates :name, presence: true, length: { maximum: 40 }, uniqueness: true
   validates :color, presence: true
   validates :due_date, presence: true
   validates :active, inclusion: { in: [true, false] }

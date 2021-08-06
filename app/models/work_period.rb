@@ -6,7 +6,7 @@ class WorkPeriod < ApplicationRecord
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates :invoiced, inclusion: { in: [true, false] }
-
+  
   def self.with_project_details
     hashed_work_periods = self.all.to_a.map(&:serializable_hash)
     add_project_details(hashed_work_periods)
@@ -15,7 +15,7 @@ class WorkPeriod < ApplicationRecord
   # Hours worked on a project
   def self.total_hours project_id
     self.where(project_id: project_id)
-      .map { |wp| (wp.end_time - wp.start_time) / 60 / 60}
+      .map { |wp| ((wp.end_time - wp.start_time) / 60.0 / 60.0) / 1000.0 }
       .inject(&:+)
   end
 
@@ -30,22 +30,19 @@ class WorkPeriod < ApplicationRecord
   end
 
   def self.last_week
+    # Time points to reject by need to be moving hence cannot use 1.week.ago
+    exact_week = 604800000
     wp_in_last_week = self.all
-      .reject { |wp| wp.end_time < 1.week.ago }
+      .reject { |wp| wp.end_time <  ((Time.zone.now.to_f * 1000) - exact_week) }
       .to_a
       .map(&:serializable_hash)
     add_project_details(wp_in_last_week)
   end
 
-  def self.last_fortnight
-    wp_in_last_fortnight = self.all.reject { |wp| wp.end_time < 2.weeks.ago }
-      .to_a
-      .map(&:serializable_hash)
-    add_project_details(wp_in_last_fortnight)
-  end
-
   def self.last_month
-    wp_in_last_month = self.all.reject { |wp| wp.end_time < 1.month.ago }
+    exact_week = 604800000
+    wp_in_last_month = self.all
+      .reject { |wp| wp.end_time <  ((Time.zone.now.to_f * 1000) - (exact_week * 6)) }
       .to_a
       .map(&:serializable_hash)
     add_project_details(wp_in_last_month)
