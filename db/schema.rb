@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 2021_08_01_091202) do
 
   create_table "work_periods", force: :cascade do |t|
     t.string "title"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.bigint "start_time"
+    t.bigint "end_time"
     t.bigint "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
