@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   post "/login", to: "users#login"
   get "/user", to: "users#user_details"
   # DASH
-  get "/dash", to: "users#dash"
+  get "/dash/", to: "users#dash"
+  get "/dash/:period", to: "users#dash"
   # CLIENTS
   get "/clients", to: "clients#index"
   post "/clients", to: "clients#create"

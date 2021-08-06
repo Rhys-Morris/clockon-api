@@ -9,7 +9,12 @@ class Task < ApplicationRecord
 
   # Get highest priority tasks
   def self.priority
-    self.with_project_details(self.all.sort_by {|task| task.due_date}.slice(0..7))
+    priority_tasks = self
+      .all
+      .sort_by { |task| task.due_date }
+      .reject { |task| task.completed }
+      .slice(0..7)
+    self.with_project_details(priority_tasks)
   end
 
   def self.with_project_details tasks
@@ -19,4 +24,5 @@ class Task < ApplicationRecord
       task[:project_color] = project.color
     end
   end
+
 end

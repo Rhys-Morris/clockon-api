@@ -29,12 +29,18 @@ class UsersController < ApplicationController
   end
 
   def dash
-    render json: { 
-      user: { name: @user.name, email: @user.email },
-      tasks: @user.tasks.priority,
-      work_periods: @user.work_periods.last_week
-    }, 
-    status: 200
+    if !params[:period]
+      render json: { 
+        user: { name: @user.name, email: @user.email },
+        tasks: @user.tasks.priority,
+        work_periods: @user.work_periods.last_week,
+      }, 
+      status: 200
+    elsif params[:period] == "week"
+      render json: { work_periods: @user.work_periods.last_week }, status: 200
+    elsif params[:period] == "month"
+      render json: { work_periods: @user.work_periods.last_month }, status: 200
+    end
   end
 
   private
