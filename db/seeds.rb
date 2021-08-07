@@ -13,8 +13,7 @@ if Client.count == 0
 end
 
 if Project.count == 0
-    Project.create(name: "Test Project 1", color: "#ff0000", due_date: "2022-10-10", billable: true, active: true, hours: 24, user_id: 1, client_id: 1)
-    Project.create(name: "Test Project 2", color: "#00ff00", due_date: "2022-10-10", billable: false, active: true, hours: 14, user_id: 1, client_id: 2)
-    Project.create(name: "Test Project 3", color: "#ffff00", due_date: "2022-10-10", billable: true, active: false, hours: 44, user_id: 1, client_id: 3)
-    puts "Seeded projects"
+    Project.create(name: "Test Project 1", color: "#ff0000", due_date: "2022-10-10", billable: true, billable_rate: 35, active: true, user_id: 1, client_id: 1)
+    Project.create(name: "Test Project 2", color: "#00ff00", due_date: "2022-10-10", billable: false, billable_rate: 35, active: true, user_id: 1, client_id: 2)
+    Project.create(name: "Test Project 3", color: "#ffff00", due_date: "2022-10-10", billable: true, billable_rate: 35, active: false, user_id: 1, client_id: 3)
 end

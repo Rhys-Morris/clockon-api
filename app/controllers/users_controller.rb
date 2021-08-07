@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorized, only: [:user_details, :dash]
+  before_action :authorized, only: [:user_details, :dash, :destroy]
 
   # REGISTRATION
   def create
@@ -41,6 +41,13 @@ class UsersController < ApplicationController
     elsif params[:period] == "month"
       render json: { work_periods: @user.work_periods.last_month }, status: 200
     end
+  end
+
+  # DESTROY
+
+  def destroy
+    @user.destroy
+    render head: :no_content
   end
 
   private
