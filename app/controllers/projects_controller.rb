@@ -15,12 +15,12 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    render json: { project: Project.with_additional_details(@project.id), tasks: @project.tasks, expenses: @project.expenses }, status: 200
+    render json: { project: Project.with_additional_details(@project.id), tasks: @project.tasks, expenses: map_expense_receipts(@project.expenses) }, status: 200
   end
 
   def update
     if @project.update(project_params)
-      render json: { project: Project.with_additional_details(@project.id), tasks: @project.tasks, expenses: @project.expenses }, status: 200
+      render json: { project: Project.with_additional_details(@project.id), tasks: @project.tasks, expenses: map_expense_receipts(@project.expenses) }, status: 200
     else
       error = @project.errors.full_messages
       set_project
@@ -45,5 +45,12 @@ class ProjectsController < ApplicationController
 
   def fetch_all_projects
     @projects = @user.projects.with_client_and_hours
+  end
+
+  def map_expense_receipts expenses
+    expenses.to_a.map(&:serializable_hash).each do |exp|
+      instance = Expense.find(exp["id"])
+      exp[:receipt_url] = url_for(instance.receipt) if instance.receipt.attached?
+    end
   end
 end

@@ -1,5 +1,8 @@
 class Expense < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   belongs_to :project
+  has_one_attached :receipt
 
   # Validations
   validates :name, presence: true, length: { maximum: 40 }
