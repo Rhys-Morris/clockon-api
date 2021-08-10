@@ -12,7 +12,7 @@ class Project < ApplicationRecord
   validates :due_date, presence: true
   validates :active, inclusion: { in: [true, false] }
   validates :billable, inclusion: { in: [true, false] }
-  validates :billable_rate, numericality: { less_than: 10000, greater_than: 0 }
+  validates :billable_rate, numericality: { less_than: 10000, greater_than_or_equal_to: 0 }
 
   def self.with_additional_details(id)
     client_name = self.find(id).client.name
