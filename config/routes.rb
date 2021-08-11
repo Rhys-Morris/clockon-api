@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   # PROJECTS
   get "/projects", to: "projects#index"
   post "/projects", to: "projects#create"
+  post "/projects/rates/update", to: "projects#update_rates"
   get "/projects/:id", to: "projects#show"
   put "/projects/:id", to: "projects#update"
   delete "/projects/:id", to: "projects#destroy"

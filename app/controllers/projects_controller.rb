@@ -33,10 +33,15 @@ class ProjectsController < ApplicationController
     render json: { projects: fetch_all_projects }, status: 200
   end
 
+  def update_rates
+    Project.where(billable_rate: params[:project][:previous_rate]).update_all(billable_rate: params[:project][:billable_rate])
+    render json: { message: "success" }, status: :ok
+  end
+
   private
 
   def project_params
-    params.require(:project).permit(:name, :color, :due_date, :active, :id, :billable, :project_id, :client_id, :hours, :billable_rate)
+    params.require(:project).permit(:name, :color, :due_date, :active, :id, :billable, :project_id, :client_id, :hours, :billable_rate, :previous_rate)
   end
   
   def set_project

@@ -23,7 +23,7 @@ class WorkPeriodsController < ApplicationController
 
   def invoice
     begin
-      WorkPeriod.invoice_all
+      @project.work_periods.invoice_all
       render json: { work_periods: @project.work_periods }
     rescue => e
        render json: { error: e }
