@@ -30,6 +30,10 @@ class WorkPeriodsController < ApplicationController
     end
   end
 
+  def invoice_creation
+    render json: { work_periods: Project.find(params[:project_id]).work_periods.where(invoiced: false).with_project_details }, status: 200
+  end
+
   private
 
   def set_work_period

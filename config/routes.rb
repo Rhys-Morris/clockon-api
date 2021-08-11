@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # CLIENTS
   get "/clients", to: "clients#index"
   post "/clients", to: "clients#create"
+  get "/clients/:id", to: "clients#show"
   put "/clients/:id", to: "clients#update"
   delete "/clients/:id", to: "clients#destroy"
   # PROJECTS
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
   # WORK PERIODS
   get "/work", to: "work_periods#index"
   get "/work/:project_id/invoice", to: "work_periods#invoice"
+  get "/work/:project_id/invoice-creation", to: "work_periods#invoice_creation"
   post "/work/:project_id", to: "work_periods#create"
   delete "/work/:project_id/:id", to: "work_periods#destroy"
 end
