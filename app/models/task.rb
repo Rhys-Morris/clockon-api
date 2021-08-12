@@ -11,9 +11,9 @@ class Task < ApplicationRecord
   def self.priority
     priority_tasks = self
       .all
-      .sort_by { |task| task.due_date }
+      .order(:due_date)
       .reject { |task| task.completed }
-      .slice(0..7)
+      .slice(0..4)
     self.with_project_details(priority_tasks)
   end
 

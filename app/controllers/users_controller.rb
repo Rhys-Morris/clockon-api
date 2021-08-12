@@ -34,6 +34,9 @@ class UsersController < ApplicationController
         user: { name: @user.name, email: @user.email },
         tasks: @user.tasks.priority,
         work_periods: @user.work_periods.last_week,
+        active_clients: Client.where(active: true).count,
+        active_projects: Client.where(active: true).count,
+        next_project: Project.order(:due_date)[0]
       }, 
       status: 200
     elsif params[:period] == "week"
