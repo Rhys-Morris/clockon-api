@@ -142,10 +142,10 @@ RSpec.describe "WorkPeriod Factory" do
             expect(@work_period.title).to eq "A task I was working on"
         end
         it "has the correct start_time" do
-            expect(@work_period.start_time).to eq "2021-07-28 12:50:49"
+            expect(@work_period.start_time).to eq 1628843877422
         end
         it "has the correct end_time" do
-            expect(@work_period.end_time).to eq "2021-07-28 12:50:56"
+            expect(@work_period.end_time).to eq 1628843890491
         end
         it "has the correct invoiced property" do
             expect(@work_period.invoiced).to eq false

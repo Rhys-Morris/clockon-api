@@ -24,7 +24,7 @@ RSpec.describe Project, type: :model do
     end
 
     it "should have a billable rate between 0 and 9999" do
-      @project.billable_rate = 0
+      @project.billable_rate = -1.0
       expect(@project).to be_invalid
       @project.billable_rate = 10000
       expect(@project).to be_invalid
